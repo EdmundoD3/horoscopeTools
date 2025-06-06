@@ -14,3 +14,48 @@ export const validThemes = [
   "intuición", "energía general", "confianza", "vida diaria", "hogar", "retos o dificultades",
   "reconciliaciones", "inspiración o creatividad"
 ];
+
+export const weeklyThemes = [
+  "Nuevos comienzos y oportunidades",
+  "Cierres de ciclo y transformaciones",
+  "Relaciones y vínculos personales",
+  "Decisiones importantes",
+  "Trabajo y metas profesionales",
+  "Dinero y asuntos materiales",
+  "Salud física y emocional",
+  "Crecimiento personal e intuición",
+  "Comunicación y expresión",
+  "Creatividad e inspiración",
+  "Retos y superación",
+  "Espiritualidad y conexión interior"
+];
+
+const monthlyThemes = [
+  "Balance y evolución personal",
+  "Avances en metas y proyectos",
+  "Desafíos y aprendizajes",
+  "Relaciones afectivas y vínculos",
+  "Cambio de perspectivas",
+  "Trabajo, carrera y vocación",
+  "Finanzas y planificación",
+  "Bienestar integral (salud física y emocional)",
+  "Toma de decisiones clave",
+  "Crecimiento espiritual y conexión interna",
+  "Inspiración y nuevas ideas",
+  "Organización, enfoque y hábitos"
+];
+
+const yearlyThemes = [
+  "Transformaciones profundas y evolución personal",
+  "Cierre de ciclos y nuevos comienzos",
+  "Estabilidad emocional y relaciones duraderas",
+  "Crecimiento en carrera o vocación",
+  "Oportunidades financieras y administración de recursos",
+  "Fortalecimiento interior y espiritualidad",
+  "Desafíos importantes y cómo superarlos",
+  "Propósitos, visión y dirección de vida",
+  "Cambios en el entorno o estilo de vida",
+  "Salud integral y autocuidado",
+  "Red de apoyo, vínculos sociales y comunidad",
+  "Logros, recompensas y aprendizajes del año"
+];
