@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css">
+  <title>Agregar Horóscopos (Bulk)</title>
+  <script type="module" src="shared/constants.js"></script>
+  <script type="module" src="scripts/generatehtml.js"></script>
+</head>
+
+<body>
+  <header>
+    <a href="/manage">manage</a>
+    <a href="/promp.html">promp</a>
+  </header>
+  <div class="container">
+    <h1>Agregar Horóscopos en Bulk</h1>
+    <form id="bulkForm">
+      <label for="sign">Signo:</label>
+      <select id="sign">
+      </select>
+
+      <label for="type">Frecuencia:</label>
+      <select id="type">
+      </select>
+
+      <label for="lang">Idioma:</label>
+      <select id="lang">
+      </select>
+
+      <label for="theme">Tema:</label>
+      <select id="theme">
+      </select>
+
+      <label for="bulkInput">Entradas (formato: [{"title": "...", "content": "..."}, ...]):</label>
+      <textarea id="bulkInput"></textarea>
+
+      <p class="error" id="error"></p>
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+
+  <script src="scripts/bulk.js" defer>
+
+  </script>
+</body>
+
+</html>

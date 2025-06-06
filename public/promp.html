@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Generador de Prompts de Horóscopos</title>
+  
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      font-size: 1em;
+    }
+
+    textarea {
+      height: 150px;
+      resize: vertical;
+    }
+  </style>
+  <script type="module" src="shared/constants.js"></script>
+  <script type="module" src="scripts/generatehtml.js"></script>
+  <script src="scripts/constants.js"></script>
+  <script src="scripts/promp.js" defer></script>
+</head>
+
+<body>
+  <h1>Generador de Prompts de Horóscopos</h1>
+
+  <label for="sign">Signo:</label>
+  <select id="sign"></select>
+
+  <label for="type">Frecuencia:</label>
+  <select id="type"></select>
+
+  <label for="lang">Idioma:</label>
+  <select id="lang"></select>
+
+  <label for="theme">Tema:</label>
+  <select id="theme">
+  </select>
+
+  <label for="promp">Prompt generada:</label>
+  <textarea id="promp" readonly></textarea>
+</body>
+
+</html>

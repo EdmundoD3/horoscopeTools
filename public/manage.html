@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- <link rel="stylesheet" href="styles.css"> -->
+  <title>Lista de Horóscopos</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1em;
+      background: #f2f2f2;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 1em;
+      background: white;
+    }
+
+    th,
+    td {
+      padding: 0.5em;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+    .controls {
+      margin: 1em 0;
+    }
+
+    .pagination {
+      margin-top: 1em;
+    }
+
+    button {
+      margin: 0 0.25em;
+    }
+
+    input,
+    select {
+      margin: 0 0.5em 0 0;
+    }
+  </style>
+  <script type="module" src="shared/constants.js"></script>
+  <script type="module" src="scripts/generatehtml.js"></script>
+</head>
+
+<body>
+  <header>
+    <a href="/">Bulk</a>
+  </header>
+  <h1>Horóscopos almacenados</h1>
+
+  <div class="controls">
+    <label>Buscar por signo:</label>
+    <select id="sign"></select>
+
+    <label>Idioma:</label>
+    <select id="lang">
+    </select>
+
+    <label for="theme">Tema:</label>
+    <select id="theme">
+      <option value="">Todos</option>
+    </select>
+    <label for="type">Frecuencia:</label>
+    <select id="type">
+    </select>
+    <label for="search">Search:</label>
+    <input type="text" name="search" id="search">
+
+    <button onclick="loadEntries()">Buscar</button>
+  </div>
+
+  <table id="entryTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Signo</th>
+        <th>Frecuencia</th>
+        <th>Idioma</th>
+        <th>Tema</th>
+        <th>Título</th>
+        <th>Contenido</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div class="pagination">
+    <button onclick="prevPage()">Anterior</button>
+    <span id="pageIndicator"></span>
+    <button onclick="nextPage()">Siguiente</button>
+  </div>
+
+  <script src="scripts/manage.js">
+
+  </script>
+</body>
+
+</html>
