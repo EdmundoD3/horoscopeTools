@@ -16,15 +16,15 @@ class FormStorage {
     }
     console.log(itemJson?.theme);
     this.sign = document.getElementById('sign')
-    if (itemJson?.sign) this.sign.value = itemJson.sign;
+    if (itemJson?.sign) this.sign?.value = itemJson.sign;
     this.type = document.getElementById('frequency')
-    this.type.value = itemJson.type??"daily";
+    this.type.value = itemJson?.type??"daily";
     this.lang = document.getElementById('lang')
-    if (itemJson?.lang) this.lang.value = itemJson.lang;
+    if (itemJson?.lang) this.lang?.value = itemJson.lang;
 
     initThemes(themesByFrequency[this.type.value])
     this.theme = document.getElementById('theme')
-    if (itemJson?.theme) this.theme.value = itemJson.theme;
+    if (itemJson?.theme) this.theme?.value = itemJson.theme;
   }
   save() {
     const { sign, type, lang, theme } = this.getValue()
