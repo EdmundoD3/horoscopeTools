@@ -1,10 +1,12 @@
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
-  background-color: #f4f4f4;
+  padding: 1em;
+  background: #2b2b2b;
 }
+
 .container {
-  background: white;
+  background: rgb(72, 72, 72);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -31,14 +33,10 @@ textarea {
 .error {
   color: red;
 }
-body {
-  font-family: sans-serif;
-  padding: 1em;
-  background: #f2f2f2;
-}
+
 
 form {
-  background: white;
+  /* background: white; */
   padding: 1em;
   border-radius: 8px;
   max-width: 600px;
@@ -49,6 +47,7 @@ label {
   display: block;
   margin-top: 1em;
   font-weight: bold;
+  color: aliceblue;
 }
 
 input,
@@ -63,23 +62,19 @@ button {
   margin-top: 1em;
   padding: 0.5em 1em;
 }
-body {
-  font-family: sans-serif;
-  padding: 1em;
-  background: #f2f2f2;
-}
 
 table {
   border-collapse: collapse;
   width: 100%;
   margin-top: 1em;
-  background: white;
+  background: rgb(88, 88, 88);
 }
 
 th,
 td {
   padding: 0.5em;
-  border: 1px solid #ccc;
+  border: 1px solid #4a4a4a;
+  color: aliceblue;
   text-align: left;
 }
 

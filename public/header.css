@@ -4,7 +4,7 @@
   align-items: center;
   gap: 2rem;
   padding: 1rem 2rem;
-  background: #f8f8f8;
+  /* background: #f8f8f8; */
   border-bottom: 1px solid #e0e0e0;
   font-family: Arial, sans-serif;
 }
@@ -24,7 +24,7 @@ nav {
 }
 
 nav a {
-  color: #555;
+  color: aliceblue;
   text-decoration: none;
   padding: 0.3rem 0;
   position: relative;
@@ -33,7 +33,7 @@ nav a {
 
 /* Efecto hover y activo */
 nav a:hover {
-  color: #000;
+  color: rgb(201, 230, 255);
 }
 
 nav a::after {
