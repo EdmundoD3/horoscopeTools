@@ -5,15 +5,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="header.css">
   <title>Agregar Horóscopos (Bulk)</title>
   <script type="module" src="shared/constants.js"></script>
-  <script type="module" src="scripts/generatehtml.js"></script>
+
 </head>
 
 <body>
-  <header>
-    <a href="/manage">manage</a>
-    <a href="/promp.html">promp</a>
+  <header id="header">
   </header>
   <div class="container">
     <h1>Agregar Horóscopos en Bulk</h1>
@@ -22,8 +21,8 @@
       <select id="sign">
       </select>
 
-      <label for="type">Frecuencia:</label>
-      <select id="type">
+      <label for="frequency">Frecuencia:</label>
+      <select id="frequency">
       </select>
 
       <label for="lang">Idioma:</label>
@@ -42,7 +41,8 @@
     </form>
   </div>
 
-  <script src="scripts/bulk.js" defer>
+  <script type="module" src="scripts/generatehtml.js"></script>
+  <script type="module" src="scripts/bulk.js" defer>
 
   </script>
 </body>

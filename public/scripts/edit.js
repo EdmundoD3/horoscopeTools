@@ -21,7 +21,7 @@ async function fetchEntry() {
 document.getElementById('editForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const entry = new HoroscopeEntry({
-    type: document.getElementById('type').value,
+    type: document.getElementById('frequency').value,
     title: document.getElementById('title').value,
     content: document.getElementById('content').value,
     sign: document.getElementById('sign').value,

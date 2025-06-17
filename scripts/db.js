@@ -2,7 +2,7 @@
 import { Router } from 'express';
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
-import { validFrequencies, validLanguages, validSigns, validThemes } from '../shared/constants.js';
+import { validFrequencies, validLanguages, validSigns, dailyThemes, themesByFrequency } from '../shared/constants.js';
 import { HoroscopeEntry } from '../shared/models/horoscopoEntry.js';
 const router = Router();
 let db;
@@ -17,9 +17,9 @@ async function initializeDB() {
     CREATE TABLE IF NOT EXISTS horoscope_entries (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       sign TEXT CHECK(sign IN ('${validSigns.join("','")}')) NOT NULL,
-      type TEXT CHECK(type IN ('${validFrequencies.join("','")}')) NOT NULL,
-      lang TEXT CHECK(lang IN ('${validLanguages.join("','")}')) NOT NULL,
-      theme TEXT CHECK(theme IN ('${validThemes.join("','")}')) NOT NULL,
+      type TEXT NOT NULL,
+      lang TEXT NOT NULL,
+      theme TEXT NOT NULL,
       title TEXT NOT NULL,
       content TEXT NOT NULL,
       lastSend TEXT,
@@ -33,7 +33,7 @@ function validateBaseEntry(data) {
   if (!validSigns.includes(sign)) throw new Error(`Signo inválido: ${sign}`);
   if (!validFrequencies.includes(type)) throw new Error(`Frecuencia inválida: ${type}`);
   if (!validLanguages.includes(lang)) throw new Error(`Idioma inválido: ${lang}`);
-  if (!validThemes.includes(theme)) throw new Error(`Tema inválido: ${theme}`);
+  if (!themesByFrequency[type].includes(theme)) throw new Error(`Tema inválido: ${theme}`);
 }
 
 function validateBulkEntry(entry) {
@@ -90,7 +90,6 @@ router.get('/entries', async (req, res) => {
     if (search) { filters.push('(title LIKE ? OR content LIKE ?)'); params.push(`%${search}%`, `%${search}%`); }
 
     const whereClause = filters.length ? `WHERE ${filters.join(' AND ')}` : '';
-
     const entries = await db.all(
       `SELECT * FROM horoscope_entries ${whereClause} ORDER BY createdAt DESC LIMIT ? OFFSET ?`,
       ...params, pageSize, offset
@@ -106,6 +105,81 @@ router.get('/entries', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+router.get("/entries/random",async (req, res) => {
+  try {
+    const { sign, type, lang, includeThemes, excludeThemes } = req.query;
+
+    if (!sign || !type || !lang) {
+      return res.status(400).json({ error: 'sign, type, and lang are required' });
+    }
+
+    const entry = await getRandomHoroscope({
+      sign,
+      type,
+      lang,
+      includeThemes: includeThemes?.split(',') ?? [],
+      excludeThemes: excludeThemes?.split(',') ?? [],
+    });
+
+    if (!entry) {
+      return res.status(404).json({ error: 'No matching horoscope entry found.' });
+    }
+
+    res.json(entry);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+})
+async function getRandomHoroscope({
+  sign,
+  type,
+  lang,
+  includeThemes = [], // opcional
+  excludeThemes = []  // opcional
+}) {
+  const filters = [`sign = ?`, `type = ?`, `lang = ?`];
+  const params = [sign, type, lang];
+
+  if (includeThemes.length > 0) {
+    filters.push(`theme IN (${includeThemes.map(() => '?').join(',')})`);
+    params.push(...includeThemes);
+  }
+
+  if (excludeThemes.length > 0) {
+    filters.push(`theme NOT IN (${excludeThemes.map(() => '?').join(',')})`);
+    params.push(...excludeThemes);
+  }
+
+  const whereClause = `WHERE ${filters.join(' AND ')}`;
+
+  // 1. Intentamos obtener uno con lastSend IS NULL
+  const nullQuery = `
+    SELECT *
+    FROM horoscope_entries
+    ${whereClause} AND lastSend IS NULL
+    ORDER BY RANDOM()
+    LIMIT 1
+  `;
+  const nullResult = await db.get(nullQuery, params);
+
+  if (nullResult) return nullResult;
+
+  // 2. Si no hay, tomamos uno aleatorio de los 100 más antiguos
+  const oldQuery = `
+    SELECT *
+    FROM (
+      SELECT * FROM horoscope_entries
+      ${whereClause} AND lastSend IS NOT NULL
+      ORDER BY lastSend ASC
+      LIMIT 100
+    )
+    ORDER BY RANDOM()
+    LIMIT 1
+  `;
+  const oldResult = await db.get(oldQuery, params);
+  return oldResult;
+}
+
 // Descargar todas las entradas como archivo JSON
 router.get('/entries/backup', async (req, res) => {
   try {
@@ -116,7 +190,7 @@ router.get('/entries/backup', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-// Obtener entradas paginadas y filtradas
+
 router.get('/entries/:id', async (req, res) => {
   try {
     const id = req.params.id;

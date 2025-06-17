@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="header.css">
   <script type="module" src="shared/constants.js"></script>
   <script type="module" src="scripts/generatehtml.js"></script>
   <script type="module" src="scripts/edit.js" defer></script>
@@ -12,14 +13,16 @@
 </head>
 
 <body>
+  <header id="header">
+  </header>
   <h1>Editar Horóscopo</h1>
   <form id="editForm">
     <label for="sign">Signo:</label>
     <select id="sign">
     </select>
 
-    <label for="type">Frecuencia:</label>
-    <select id="type">
+    <label for="frequency">Frecuencia:</label>
+    <select id="frequency">
     </select>
 
     <label for="lang">Idioma:</label>

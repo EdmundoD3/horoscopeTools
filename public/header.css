@@ -1,0 +1,52 @@
+/* Estilos generales del header */
+#header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 2rem;
+  background: #f8f8f8;
+  border-bottom: 1px solid #e0e0e0;
+  font-family: Arial, sans-serif;
+}
+
+/* Logo con estilo diferenciado */
+.logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+  text-decoration: none;
+}
+
+/* Estilos de los enlaces de navegación */
+nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+nav a {
+  color: #555;
+  text-decoration: none;
+  padding: 0.3rem 0;
+  position: relative;
+  transition: color 0.2s;
+}
+
+/* Efecto hover y activo */
+nav a:hover {
+  color: #000;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #000;
+  transition: width 0.3s;
+}
+
+nav a:hover::after {
+  width: 100%;
+}

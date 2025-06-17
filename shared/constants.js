@@ -4,7 +4,7 @@ export const validSigns = ['all',
   'aries', 'tauro', 'geminis', 'cancer', 'leo', 'virgo',
   'libra', 'escorpio', 'sagitario', 'capricornio', 'acuario', 'piscis'
 ];
-export const validThemes = [
+export const dailyThemes = [
   "amor", 
   "amistad", "familia", "pareja",
   "trabajo", "dinero", "salud", 
@@ -30,7 +30,7 @@ export const weeklyThemes = [
   "Espiritualidad y conexión interior"
 ];
 
-const monthlyThemes = [
+export const monthlyThemes = [
   "Balance y evolución personal",
   "Avances en metas y proyectos",
   "Desafíos y aprendizajes",
@@ -45,7 +45,7 @@ const monthlyThemes = [
   "Organización, enfoque y hábitos"
 ];
 
-const yearlyThemes = [
+export const yearlyThemes = [
   "Transformaciones profundas y evolución personal",
   "Cierre de ciclos y nuevos comienzos",
   "Estabilidad emocional y relaciones duraderas",
@@ -59,3 +59,7 @@ const yearlyThemes = [
   "Red de apoyo, vínculos sociales y comunidad",
   "Logros, recompensas y aprendizajes del año"
 ];
+
+export const themesByFrequency = {
+  "daily": dailyThemes, 'weekly': weeklyThemes, 'monthly': monthlyThemes, 'yearly': yearlyThemes
+}

@@ -1,3 +1,6 @@
+import { themesByFrequency } from "../../shared/constants.js";
+import { initThemes } from "./generatehtml.js";
+
 const key = "bulkKey"
 class FormStorage {
   constructor(key = "defaultKey") {
@@ -14,10 +17,12 @@ class FormStorage {
     console.log(itemJson?.theme);
     this.sign = document.getElementById('sign')
     if (itemJson?.sign) this.sign.value = itemJson.sign;
-    this.type = document.getElementById('type')
-    if (itemJson?.type) this.type.value = itemJson.type;
+    this.type = document.getElementById('frequency')
+    this.type.value = itemJson.type??"daily";
     this.lang = document.getElementById('lang')
     if (itemJson?.lang) this.lang.value = itemJson.lang;
+
+    initThemes(themesByFrequency[this.type.value])
     this.theme = document.getElementById('theme')
     if (itemJson?.theme) this.theme.value = itemJson.theme;
   }
@@ -41,6 +46,7 @@ class FormStorage {
 }
 
 const formStorage = new FormStorage(key)
+
 
 document.getElementById('bulkForm').addEventListener('submit', async function (e) {
   e.preventDefault();

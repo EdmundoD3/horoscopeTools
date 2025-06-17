@@ -1,11 +1,12 @@
+
 let currentPage = 1;
 const pageSize = 10;
-
+let totalpages;
 async function loadEntries() {
-  const sign = document.getElementById('sign').value;
-  const lang = document.getElementById('lang').value;
-  const theme = document.getElementById("theme").value;
-  const type = document.getElementById("type").value;
+  const sign = document.getElementById('sign-all').value;
+  const lang = document.getElementById('lang-all').value;
+  const theme = document.getElementById("theme-all").value;
+  const type = document.getElementById("frequency-all").value;
   const search = document.getElementById("search").value;
 
   const url = new URL('api/entries', window.location.origin);
@@ -19,6 +20,15 @@ async function loadEntries() {
 
   const res = await fetch(url);
   const { entries, total } = await res.json();
+  totalpages= Math.ceil(total/pageSize??1) 
+  document.getElementById("total").textContent = `Total: ${total} `
+  let str = ""; 
+  str += sign ? `sign: ${sign} ` : "";
+  str += lang ? `lang: ${lang} ` : "";
+  str += theme ? `theme: ${theme} ` : "";
+  str += type ? `type: ${type}, ` : "";
+  str += search ? `search: ${search} ` : "";
+  document.getElementById("para").textContent = str?`Para: ${str}`:"";
   renderTable(entries);
   document.getElementById('pageIndicator').textContent = `Página ${currentPage}`;
 }
@@ -47,6 +57,7 @@ function renderTable(entries) {
 }
 
 function nextPage() {
+  if(currentPage>=totalpages) return;
   currentPage++;
   loadEntries();
 }
@@ -55,7 +66,14 @@ function prevPage() {
   if (currentPage > 1) currentPage--;
   loadEntries();
 }
-
+function firstPage() {
+  currentPage=1;
+  loadEntries();
+}
+function lastPage(){
+  currentPage = totalpages
+  loadEntries()
+}
 async function deleteEntry(id) {
   if (!confirm('¿Eliminar esta entrada?')) return;
   const res = await fetch(`api/entries/${id}`, { method: 'DELETE' });

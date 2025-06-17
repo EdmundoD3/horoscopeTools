@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- <link rel="stylesheet" href="styles.css"> -->
+   <link rel="stylesheet" href="header.css">
   <title>Lista de Horóscopos</title>
   <style>
     body {
@@ -43,38 +44,70 @@
     select {
       margin: 0 0.5em 0 0;
     }
+
+    /* Opción 2: Efecto de "parpadeo" */
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.7;
+      }
+    }
+
+    tbody.updated {
+      animation: blink 0.3s 2;
+      /* Repite 2 veces */
+    }
+
+    /* Opción 3: Borde resaltado */
+    @keyframes borderFlash {
+      0% {
+        box-shadow: 0 0 0 1px rgba(0, 150, 255, 0.5);
+      }
+
+      100% {
+        box-shadow: none;
+      }
+    }
+
+    tbody.updated {
+      animation: borderFlash 0.4s ease-out;
+    }
   </style>
   <script type="module" src="shared/constants.js"></script>
   <script type="module" src="scripts/generatehtml.js"></script>
 </head>
 
 <body>
-  <header>
-    <a href="/">Bulk</a>
+    <header id="header">
   </header>
   <h1>Horóscopos almacenados</h1>
 
   <div class="controls">
     <label>Buscar por signo:</label>
-    <select id="sign"></select>
+    <select id="sign-all"></select>
 
     <label>Idioma:</label>
-    <select id="lang">
+    <select id="lang-all">
     </select>
 
-    <label for="theme">Tema:</label>
-    <select id="theme">
+    <label for="theme-all">Tema:</label>
+    <select id="theme-all">
       <option value="">Todos</option>
     </select>
-    <label for="type">Frecuencia:</label>
-    <select id="type">
+    <label for="frequency-all">Frecuencia:</label>
+    <select id="frequency-all">
     </select>
     <label for="search">Search:</label>
     <input type="text" name="search" id="search">
 
     <button onclick="loadEntries()">Buscar</button>
   </div>
-
+  <div><span id="total"></span><span id="para"></span></div>
   <table id="entryTable">
     <thead>
       <tr>
@@ -92,9 +125,11 @@
   </table>
 
   <div class="pagination">
+    <button onclick="firstPage()">Primera</button>
     <button onclick="prevPage()">Anterior</button>
     <span id="pageIndicator"></span>
     <button onclick="nextPage()">Siguiente</button>
+    <button onclick="lastPage()">Ultima</button>
   </div>
 
   <script src="scripts/manage.js">
